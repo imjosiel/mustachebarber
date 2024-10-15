@@ -11,6 +11,34 @@ import { db } from "./_lib/prisma";
 import BarbershopItem from "./_components/BarbershopItem";
 import Footer from "./_components/Footer";
 
+interface QuickSearchOption {
+  imageUrl: string;
+  title: string;
+}
+
+const quickSearchOptions: QuickSearchOption[] = [
+  {
+    imageUrl: "/images/hairIcon.svg",
+    title: "Cabelo",
+  },
+  {
+    imageUrl: "/images/moustacheIcon.svg",
+    title: "Barba",
+  },
+  {
+    imageUrl: "/images/barberIcon.svg",
+    title: "Sobrancelha",
+  },
+  {
+    imageUrl: "/images/shaverIcon.svg",
+    title: "Pezinho",
+  },
+  {
+    imageUrl: "/images/hidraIcon.svg",
+    title: "Hidratação",
+  },
+];
+
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({});
   const popularBarberShops = await db.barbershop.findMany({
@@ -36,45 +64,17 @@ const Home = async () => {
       </div>
       <div className="pb-5">
         <div className="flex gap-3 overflow-auto px-5 [&::-webkit-scrollbar]:hidden">
-          <Button className="gap-2" variant={"secondary"}>
-            <Image
-              src={"/images/hairIcon.svg"}
-              width={16}
-              height={16}
-              alt="Cabelo"
-            />
-            Cabelo
-          </Button>
-
-          <Button className="gap-2" variant={"secondary"}>
-            <Image
-              src={"/images/moustacheIcon.svg"}
-              width={16}
-              height={16}
-              alt="Barba"
-            />
-            Barba
-          </Button>
-
-          <Button className="gap-2" variant={"secondary"}>
-            <Image
-              src={"/images/barberIcon.svg"}
-              width={16}
-              height={16}
-              alt="Cabelo"
-            />
-            Sobrancelha
-          </Button>
-
-          <Button className="gap-2" variant={"secondary"}>
-            <Image
-              src={"/images/shaverIcon.svg"}
-              width={16}
-              height={16}
-              alt="Cabelo"
-            />
-            Pezinho
-          </Button>
+          {quickSearchOptions.map((option) => (
+            <Button key={option.title} className="gap-2" variant={"secondary"}>
+              <Image
+                src={option.imageUrl}
+                width={16}
+                height={16}
+                alt={option.title}
+              />
+              {option.title}
+            </Button>
+          ))}
         </div>
       </div>
 
