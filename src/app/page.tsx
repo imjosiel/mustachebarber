@@ -4,40 +4,11 @@ import { Button } from "./_components/ui/button";
 import { Input } from "./_components/ui/input";
 import Image from "next/image";
 import { AppData } from "./_components/config/appData";
-import { Card, CardContent } from "./_components/ui/card";
-import { Badge } from "./_components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "./_components/ui/avatar";
 import { db } from "./_lib/prisma";
 import BarbershopItem from "./_components/BarbershopItem";
 import Footer from "./_components/Footer";
-
-interface QuickSearchOption {
-  imageUrl: string;
-  title: string;
-}
-
-const quickSearchOptions: QuickSearchOption[] = [
-  {
-    imageUrl: "/images/hairIcon.svg",
-    title: "Cabelo",
-  },
-  {
-    imageUrl: "/images/moustacheIcon.svg",
-    title: "Barba",
-  },
-  {
-    imageUrl: "/images/barberIcon.svg",
-    title: "Sobrancelha",
-  },
-  {
-    imageUrl: "/images/shaverIcon.svg",
-    title: "Pezinho",
-  },
-  {
-    imageUrl: "/images/hidraIcon.svg",
-    title: "Hidratação",
-  },
-];
+import { quickSearchOptions } from "./_constants/quickSearchQueries";
+import BookingItem from "./_components/BookingItem";
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({});
@@ -90,32 +61,7 @@ const Home = async () => {
       </div>
 
       <div className="p-5">
-        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
-          Agendamentos
-        </h2>
-        <Card className="mt-6">
-          <CardContent className="flex justify-between p-0">
-            <div className="flex flex-col gap-2 py-5 pl-5">
-              <div>
-                <Badge>Confirmado</Badge>
-              </div>
-              <h3>Corte de cabelo</h3>
-
-              <div className="flex items-center gap-2">
-                <Avatar className="h-6 w-6">
-                  <AvatarImage src="https://utfs.io/f/c97a2dc9-cf62-468b-a851-bfd2bdde775f-16p.png"></AvatarImage>
-                  <AvatarFallback>MB</AvatarFallback>
-                </Avatar>
-                <p className="text-sm">Mustachebarber</p>
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-center border-l-2 border-solid px-5">
-              <p className="text-sm">Agosto</p>
-              <p className="text-2xl">05</p>
-              <p className="text-sm">20:00</p>
-            </div>
-          </CardContent>
-        </Card>
+        <BookingItem />
       </div>
 
       <div className="p-5">
