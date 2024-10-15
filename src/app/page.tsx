@@ -9,9 +9,15 @@ import { Badge } from "./_components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./_components/ui/avatar";
 import { db } from "./_lib/prisma";
 import BarbershopItem from "./_components/BarbershopItem";
+import Footer from "./_components/Footer";
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({});
+  const popularBarberShops = await db.barbershop.findMany({
+    orderBy: {
+      name: "asc",
+    },
+  });
   console.log({ barbershops });
   return (
     <>
@@ -28,6 +34,50 @@ const Home = async () => {
           <SearchIcon />
         </Button>
       </div>
+      <div className="pb-5">
+        <div className="flex gap-3 overflow-auto px-5 [&::-webkit-scrollbar]:hidden">
+          <Button className="gap-2" variant={"secondary"}>
+            <Image
+              src={"/images/hairIcon.svg"}
+              width={16}
+              height={16}
+              alt="Cabelo"
+            />
+            Cabelo
+          </Button>
+
+          <Button className="gap-2" variant={"secondary"}>
+            <Image
+              src={"/images/moustacheIcon.svg"}
+              width={16}
+              height={16}
+              alt="Barba"
+            />
+            Barba
+          </Button>
+
+          <Button className="gap-2" variant={"secondary"}>
+            <Image
+              src={"/images/barberIcon.svg"}
+              width={16}
+              height={16}
+              alt="Cabelo"
+            />
+            Sobrancelha
+          </Button>
+
+          <Button className="gap-2" variant={"secondary"}>
+            <Image
+              src={"/images/shaverIcon.svg"}
+              width={16}
+              height={16}
+              alt="Cabelo"
+            />
+            Pezinho
+          </Button>
+        </div>
+      </div>
+
       <div className="px-5">
         <div className="relative h-[200px] w-full">
           <Image
@@ -79,6 +129,21 @@ const Home = async () => {
           ))}
         </div>
       </div>
+
+      <div className="p-5">
+        <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+          Populares
+        </h2>
+
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {popularBarberShops.map((barbershop) => (
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
+      </div>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };
