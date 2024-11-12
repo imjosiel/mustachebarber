@@ -1,8 +1,9 @@
 "use client";
 
+import MenuHeader from "@/app/_components/MenuHeader";
 import { Button } from "@/app/_components/ui/button";
 import { Barbershop } from "@prisma/client";
-import { ChevronLeftIcon, MenuIcon } from "lucide-react";
+import { ChevronLeftIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -38,7 +39,7 @@ const BarbershopImage = ({ barbershop }: BarbershopImageProp) => {
           variant="secondary"
           className="absolute right-4 top-4"
         >
-          <MenuIcon />
+          <MenuHeader />
         </Button>
       </div>
     </div>

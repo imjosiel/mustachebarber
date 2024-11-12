@@ -3,6 +3,8 @@ import BarbershopImage from "./_components/barbershop-image";
 import { notFound } from "next/navigation";
 import BarbershopDetails from "./_components/barbershop-details";
 import ServiceItem from "@/app/_components/service-item";
+import BarbershopPhones from "./_components/barbershop_phones";
+import Footer from "@/app/_components/Footer";
 
 interface barbershopPageProps {
   params: {
@@ -26,7 +28,7 @@ const barbershopPage = async ({ params }: barbershopPageProps) => {
     <div>
       <BarbershopImage barbershop={barbershop} />
       <BarbershopDetails barbershop={barbershop} />
-      <div className="gap-2 p-5">
+      <div className="gap-2 border-b border-solid p-5">
         <h2 className="mb-3 text-xs font-bold uppercase text-gray-400">
           Serviços
         </h2>
@@ -36,6 +38,14 @@ const barbershopPage = async ({ params }: barbershopPageProps) => {
           ))}
         </div>
       </div>
+
+      <div className="space-y-3 p-5">
+        {barbershop.phones.map((phone) => (
+          <BarbershopPhones key={phone} phone={phone} />
+        ))}
+      </div>
+
+      <Footer />
     </div>
   );
 };
