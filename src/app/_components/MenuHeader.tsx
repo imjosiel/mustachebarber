@@ -13,15 +13,10 @@ import { quickSearchOptions } from "../_constants/quickSearchQueries";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 const MenuHeader = () => {
-  const data = {
-    user: {
-      name: "Russell Adler",
-      image:
-        "https://support.activision.com/content/dam/atvi/support/article-assets/embedded-images/black-ops-6/BO6-ADLER.jpg",
-      email: "russeladler@blackops.com",
-    },
-  };
+  const { data } = useSession();
+
   return (
     <Sheet>
       <SheetTrigger asChild>
