@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import BarbershopDetails from "./_components/barbershop-details";
 import ServiceItem from "@/app/_components/service-item";
 import BarbershopPhones from "./_components/barbershop_phones";
-import Footer from "@/app/_components/Footer";
 
 interface barbershopPageProps {
   params: {
@@ -44,8 +43,6 @@ const barbershopPage = async ({ params }: barbershopPageProps) => {
           <BarbershopPhones key={phone} phone={phone} />
         ))}
       </div>
-
-      <Footer />
     </div>
   );
 };

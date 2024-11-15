@@ -1,14 +1,12 @@
-import { SearchIcon } from "lucide-react";
 import Header from "./_components/Header";
 import { Button } from "./_components/ui/button";
-import { Input } from "./_components/ui/input";
 import Image from "next/image";
 import { AppData } from "./_components/config/appData";
 import { db } from "./_lib/prisma";
 import BarbershopItem from "./_components/BarbershopItem";
-import Footer from "./_components/Footer";
 import { quickSearchOptions } from "./_constants/quickSearchQueries";
 import BookingItem from "./_components/BookingItem";
+import Search from "./_components/Search";
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({});
@@ -17,22 +15,16 @@ const Home = async () => {
       name: "asc",
     },
   });
-  console.log({ barbershops });
   return (
     <>
       <Header />
 
       <div className="p-5">
-        <h2 className="text-xl font-bold">Olá, pessoa</h2>
+        <h2 className="text-xl font-bold">Olá, a</h2>
         <p>Segunda-feira, 05 de Agosto</p>
       </div>
 
-      <div className="mt-[24px] flex gap-1 p-5">
-        <Input placeholder="O que deseja?" />
-        <Button>
-          <SearchIcon />
-        </Button>
-      </div>
+      <Search />
       <div className="pb-5">
         <div className="flex gap-3 overflow-auto px-5 [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((option) => (
@@ -87,9 +79,6 @@ const Home = async () => {
           ))}
         </div>
       </div>
-      <footer>
-        <Footer />
-      </footer>
     </>
   );
 };
