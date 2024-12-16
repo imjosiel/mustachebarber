@@ -11,6 +11,13 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
+  callbacks: {
+    async session({ session, user }) {
+      // Adicione user_role à sessão
+      session.user = { ...session.user, id: user.id, role: user.role };
+      return session;
+    },
+  },
 });
 
 export { handler as GET, handler as POST };

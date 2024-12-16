@@ -111,6 +111,15 @@ model BarbershopService {
   bookings     Booking[]
 }
 
+// model Barber {
+//   id       String    @id @default(uuid())
+//   name     String
+//   bookings Booking[]
+  
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
 model Booking {
   id        String            @id @default(uuid())
   userId    String
@@ -118,6 +127,8 @@ model Booking {
   serviceId String
   service   BarbershopService @relation(fields: [serviceId], references: [id])
   date      DateTime
+  // barberId  String
+  // barber    Barber?            @relation(fields: [barberId], references: [id])
   createdAt DateTime          @default(now())
   updatedAt DateTime          @updatedAt
 }
