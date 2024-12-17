@@ -14,7 +14,7 @@ import {
 } from "./ui/sheet";
 import { Separator } from "./ui/separator";
 import { useEffect, useState } from "react";
-import { addDays, format, set } from "date-fns";
+import { format, set } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Calendar } from "./ui/calendar";
 import { createBooking } from "../_actions/create-booking";
@@ -198,14 +198,15 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                     <SheetTitle>Fazer reserva</SheetTitle>
                   </SheetHeader>
                   <Separator />
-                  <div className="border-b border-solid py-5">
+                  <div className="mx-5 border-b border-solid py-5">
                     <Calendar
                       mode="single"
                       locale={ptBR}
                       selected={selectedDay}
                       onSelect={handleDateSelect}
                       className="rounded-md border"
-                      fromDate={addDays(new Date(), 0)}
+                      fromDate={new Date()}
+                      disabled={{ dayOfWeek: [0] }}
                       styles={{
                         head_cell: {
                           width: "100%",
