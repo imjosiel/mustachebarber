@@ -73,8 +73,14 @@ const MenuHeader = () => {
                     </Link>
                   </Button>
                 </SheetClose>
-                <Button className="justify-start gap-2" variant={"ghost"}>
-                  <CalendarIcon /> Agendamentos
+                <Button
+                  className="justify-start gap-2"
+                  variant={"ghost"}
+                  asChild
+                >
+                  <Link href={"/bookings"}>
+                    <CalendarIcon /> Agendamentos
+                  </Link>
                 </Button>
               </div>
 
