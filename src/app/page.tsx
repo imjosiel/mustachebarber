@@ -9,7 +9,8 @@ import BookingItem from "./_components/BookingItem";
 import Search from "./_components/Search";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./_lib/auth";
-
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 const Home = async () => {
   const session = await getServerSession(authOptions);
   const barbershops = await db.barbershop.findMany({});
@@ -44,7 +45,9 @@ const Home = async () => {
 
       <div className="p-5">
         <h2 className="text-xl font-bold">Olá, {session?.user?.name}</h2>
-        <p>Segunda-feira, 05 de Agosto</p>
+        <p className="capitalize">
+          {format(Date.now(), "EEEE, dd 'de' MMMM", { locale: ptBR })}
+        </p>
       </div>
 
       <Search />
